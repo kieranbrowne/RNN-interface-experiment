@@ -1,0 +1,13 @@
+:root {
+  font-size: calc(.6em + 1vw); }
+
+body {
+  background: #ddd;
+  box-sizing: content-box;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  margin-top: 0.275rem;
+  margin-bottom: -0.275rem;
+  padding-bottom: 0;
+  font-family: sans-serif;
+  margin: 0; }

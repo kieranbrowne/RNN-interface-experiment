@@ -1,0 +1,18 @@
+@import "solar";
+
+:root {
+  font-size: calc(.6em + 1vw);
+}
+
+body {
+
+  background: #ddd;
+  @include baseline(1rem, 1.2rem);
+  font-family: sans-serif;
+  margin: 0;
+}
+
+h2 {
+
+
+}

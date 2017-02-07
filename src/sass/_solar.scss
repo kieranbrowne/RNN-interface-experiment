@@ -1,0 +1,91 @@
+@mixin baseline(
+  $font-size: 14px,
+  $baseline: 20px,
+  $first-baseline: $baseline,
+  $after: 0,
+  $ratio: 1.4 // cap height : descender
+) {
+
+  $shift: (($ratio / 8) * $font-size);
+  $shift: $shift + (($baseline - $font-size) / 2);
+
+  box-sizing: content-box;
+
+  font-size: $font-size;
+  line-height: $baseline;
+  margin-top: ($first-baseline - $baseline + $shift);
+  $aftern: ($after - $shift);
+
+  @if $aftern < 0 {
+    margin-bottom: $aftern;
+    padding-bottom: 0;
+  } @else {
+    padding-bottom: $aftern;
+    margin-bottom: 0;
+  }
+}
+
+// grid
+@mixin gen-grid(
+  $col:12, 
+  $gut:30px,
+  $cont:100%,
+  $namespace:'',
+  $query: 'desktop'
+  ) {
+
+  $min-width: 0px;
+  $max-width: 3000px;
+
+  .grid {
+
+	max-width: $cont;
+	width: 100%;
+	box-sizing: border-box;
+	display: block;
+	font-size: 0;
+	margin: 0 auto;
+	&:after {
+	  clear: both;
+	  display:  block;
+	  content: ' ';
+	  height: 0;
+	  visibility: hidden;
+	}
+
+	%gutter {
+	}
+	%gut-right {
+	  margin-right: $gut;
+	}
+
+	@for $i from 0 through $col {
+	  @include gen-col($col,$gut,$i,$namespace);
+	}
+
+  }
+}
+
+@mixin gen-col($col,$gut,$num:1,$namespace:'') {
+  .col-#{$namespace}#{$num} {
+    $val:100% / $col * $num + 0%;
+    $timzah: 1 + ($num / $col);
+    width: calc(#{$val} - #{$gut*$timzah});
+    font-size: 1rem;
+
+    // gutter
+    margin-left: $gut;
+
+    // prototype
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+
+    // off option
+    @if $num == 0 {
+      display: none;
+    }
+  }
+}
+
